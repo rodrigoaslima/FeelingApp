@@ -1,0 +1,44 @@
+import { StatusBar } from 'react-native';
+import React from 'react';
+import AppLoading from 'expo-app-loading'
+import { NavigationContainer } from '@react-navigation/native';
+import { AppRoutes } from './src/routes/app.routes';
+
+//fonts
+import {useFonts, DMSans_400Regular } from '@expo-google-fonts/dm-sans';
+import {DMSerifDisplay_400Regular } from '@expo-google-fonts/dm-serif-display';
+import {
+  Poppins_400Regular,
+  Poppins_500Medium,
+  Poppins_700Bold
+} from '@expo-google-fonts/poppins'
+
+import { ThemeProvider } from 'styled-components/native';
+import theme from './src/theme';
+
+export default function App() {
+  const [fontsLoaded] = useFonts({
+    DMSans_400Regular, 
+    DMSerifDisplay_400Regular,
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_700Bold
+  });
+
+  if(!fontsLoaded){
+    return(
+      <AppLoading/>
+    )
+  }
+  
+  return (
+    <ThemeProvider theme={theme}>
+      <NavigationContainer>
+        <StatusBar barStyle="light-content" backgroundColor="transparent" translucent/>
+        <AppRoutes />
+      </NavigationContainer>
+    </ThemeProvider>
+    
+  );
+}
+
